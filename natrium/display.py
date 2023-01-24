@@ -16,8 +16,8 @@ class Window:
     def height(self):
         return self._disp.get_height()
 
-    def __init__(self, size:IsSizeSequence, background:IsColor, gradial_orient:IsOrientLiteral = 'horizontal',
-                 gradient_blend:int = 80, title:str = "Window", icon:str = None, resizable:bool = True):
+    def __init__(self, size, background, gradial_orient='horizontal',
+                 gradient_blend, title:str = "Window", icon:str = None, resizable:bool = True):
         flags = pygame.SRCALPHA
         if resizable:
             flags |= pygame.RESIZABLE
@@ -49,7 +49,7 @@ class Window:
         for event in self._events:
             if event.type == pygame.QUIT:
                 pygame.quit()
-                sys.exit('Natrium GUI 0.6.0\nPygame Engine 2.v')
+                sys.exit()
 
         if not isinstance(self.background, (list, tuple)):
             self._disp.fill(self.background)
@@ -64,7 +64,7 @@ class Window:
 
         self._previous_size = self.size
 
-    def listen(self, widget:widgetsBETA.Widget):
+    def listen(self, widget):
         params = []
 
         if isinstance(widget, (widgets.InputBox, widgets.Button, widgets.ToggleButton,
@@ -80,7 +80,7 @@ class Window:
 
         widget.trigger(*params)
 
-    def listen_multiple(self, widgets:clcs.Sequence[widgetsBETA.Widget]):
+    def listen_multiple(self, widgets):
         for widget in widgets:
             self.listen(widget)
 
@@ -93,7 +93,7 @@ class Window:
     def get_offset(self):
         return self._disp.get_offset()
 
-    def blit_wid(self, surf:pygame.Surface, dest:IsPosition):
+    def blit_wid(self, surf, dest):
         self._disp.blit(surf, dest)
 
     def get_rate(self):
